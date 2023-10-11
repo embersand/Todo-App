@@ -1,0 +1,203 @@
+/* Reset and base styles  */
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@400;500;700&display=swap");
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Links */
+a, a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Common */
+aside, nav, footer, header, section, main {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul, ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+/* Form */
+input, textarea, button, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button, input[type=submit] {
+  display: inline-block;
+  box-shadow: none;
+  background-color: transparent;
+  background: none;
+  cursor: pointer;
+}
+
+input:focus, input:active,
+button:focus, button:active {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+legend {
+  display: block;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 42px;
+  font-family: "Overpass", sans-serif;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 32px;
+  font-family: "Overpass", sans-serif;
+  font-weight: 500;
+}
+
+.text {
+  font-size: 16px;
+  font-family: "Overpass", sans-serif;
+  font-weight: 400;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: "Overpass", sans-serif;
+  font-weight: 400;
+  transition: opacity 0.2s ease-in;
+}
+.btn:hover {
+  opacity: 0.7;
+}
+
+.main {
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #000;
+  border-radius: 20px;
+}
+
+.main__title {
+  position: relative;
+}
+.main__title::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  width: 100%;
+  left: 0;
+  height: 2px;
+  background: #000;
+}
+
+.main__list {
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 20px;
+}
+.main__list > :not(:last-child) {
+  position: relative;
+}
+.main__list > :not(:last-child)::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  width: 100%;
+  left: 0;
+  height: 2px;
+  background: #000;
+}
+
+.main__list-item {
+  padding: 20px 0;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__list-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+
+.main__list-button {
+  width: 20px;
+  height: 20px;
+}
+.main__list-button:hover svg {
+  fill: #f02020;
+}
+.main__list-button:hover g {
+  fill: rgb(69, 207, 41);
+}/*# sourceMappingURL=main.css.map */
