@@ -81,3 +81,40 @@ const addItem = (id, text) => {
   });
   list.appendChild(newItem);
 };
+
+const left = document.querySelector('.left');
+const right = document.querySelector('.right');
+const slides = document.querySelector('.main__slides');
+
+let count = 0;
+
+Array.from(slides.children).forEach((item, index) => {
+  if (index > 0) {
+    item.style.display = 'none';
+  }
+});
+
+left.addEventListener('click', () => {
+  count--;
+  if (count < 0) {
+    Array.from(slides.children)[++count].style.display = 'none';
+    count = slides.length - 1;
+    Array.from(slides.children)[count].style.display = 'block';
+  } else {
+    Array.from(slides.children)[++count].style.display = 'none';
+    Array.from(slides.children)[count].style.display = 'block';
+  }
+});
+
+right.addEventListener('click', () => {
+  if (count < slides.length) {
+    Array.from(slides.children)[count].style.display = 'none';
+    count++;
+    console.log(count);
+    Array.from(slides.children)[count].style.display = 'block';
+  } else {
+    Array.from(slides.children)[count].style.display = 'none';
+    count = 0;
+    Array.from(slides.children)[count].style.display = 'block';
+  }
+});
