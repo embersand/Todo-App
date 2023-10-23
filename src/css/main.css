@@ -354,7 +354,11 @@ body {
     max-width: 250px;
   }
   .main__slides-item {
-    max-width: 294px;
+    max-width: 264px;
+  }
+  .main__arrows {
+    left: -7%;
+    width: 114%;
   }
   .main__text {
     max-width: 200px;
