@@ -100,33 +100,50 @@ let startX = 0;
 let currentX = 0;
 let isDown = false;
 
-Array.from(slides.children).forEach((item, index) => {
+Array.from(slides.children).forEach((item) => {
   item.addEventListener('mousedown', (event) => {
     event.preventDefault();
     startX = event.clientX;
     isDown = true;
   });
-
   item.addEventListener('mouseup', (event) => {
     event.preventDefault();
     isDown = false;
   });
-
   item.addEventListener('mouseleave', (event) => {
     event.preventDefault();
     isDown = false;
   });
-
   item.addEventListener('mousemove', (event) => {
     if (!isDown) {
       return;
     }
-
     event.preventDefault();
     currentX = event.clientX;
     if (currentX - startX < -50) {
       prevSlide();
     } else if (currentX - startX > 50) {
+      nextSlide();
+    }
+  });
+  item.addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    startX = event.targetTouches[0].clientX;
+    isDown = true;
+  });
+  item.addEventListener('touchend', (event) => {
+    event.preventDefault();
+    isDown = false;
+  });
+  item.addEventListener('touchmove', (event) => {
+    if (!isDown) {
+      return;
+    }
+    event.preventDefault();
+    currentX = event.targetTouches[0].clientX;
+    if (currentX - startX < -100) {
+      prevSlide();
+    } else if (currentX - startX > 100) {
       nextSlide();
     }
   });
