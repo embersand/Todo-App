@@ -90,8 +90,47 @@ html,
 body {
   width: 100%;
   height: 100%;
+  background: #3b3a3a;
 }
 
+@keyframes Animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes Swing {
+  15% {
+    transform: translateX(5px);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  65% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes animate {
+  0%, 100% {
+    -webkit-clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+  }
+  50% {
+    -webkit-clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+  }
+}
 .title {
   font-size: 42px;
   font-family: "Onest", sans-serif;
@@ -112,15 +151,18 @@ body {
 
 .btn {
   padding: 10px 20px;
-  border: 2px solid #000;
+  border: 2px solid #ddd;
+  color: #ddd;
   border-radius: 10px;
   font-size: 18px;
   font-family: "Onest", sans-serif;
   font-weight: 400;
-  transition: opacity 0.2s ease-in;
+  transition: all 0.3s ease-in;
 }
 .btn:hover {
-  opacity: 0.7;
+  transform: scale(1.05);
+  background-color: #ddd;
+  color: #000;
 }
 .btn:active {
   position: relative;
@@ -140,22 +182,38 @@ body {
   text-align: center;
 }
 
-.main__title {
+.titles {
   position: relative;
-}
-.main__title::after {
-  position: absolute;
-  content: "";
-  top: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  left: 0;
-  height: 2px;
-  background: #000;
+  height: 100%;
+}
+
+.main__title {
+  color: #ddd;
+  position: absolute;
+  transform: translate(0, -20px);
+}
+
+.main__title:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 2px #ddd;
+}
+
+.main__title:nth-child(2) {
+  color: #ddd;
+  animation: animate 4s ease-in-out infinite;
+}
+
+.main__subtitle {
+  color: #ddd;
 }
 
 .main__list {
   padding: 10px 20px;
-  border: 2px solid #000;
+  border: 2px solid #feffdc;
   border-radius: 20px;
 }
 .main__list > :not(:last-child) {
@@ -168,7 +226,7 @@ body {
   width: 100%;
   left: 0;
   height: 2px;
-  background: #000;
+  background: #feffdc;
 }
 
 .main__list-item {
@@ -180,6 +238,8 @@ body {
   align-items: center;
   transition: all 0.2s ease-in;
   transform: translate(-120%, 0px);
+  animation-name: Swing;
+  animation-duration: 1s;
 }
 .main__list-item._active {
   transform: translate(0, 0);
@@ -190,6 +250,13 @@ body {
 
 .main__text {
   width: 350px;
+  color: #ddd;
+}
+.main__text::-moz-placeholder {
+  color: #ddd;
+}
+.main__text::placeholder {
+  color: #ddd;
 }
 
 .main__list-button {
@@ -197,7 +264,7 @@ body {
   height: 20px;
 }
 .main__list-button svg {
-  fill: black;
+  fill: #ddd;
   transition: fill 0.2s ease-in;
 }
 .main__list-button svg:hover {
@@ -215,7 +282,7 @@ body {
 .main__slides-item {
   width: 544px;
   height: 300px;
-  background: rgba(234, 255, 252, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 25px;
   display: none;
   animation-name: Animation;
@@ -228,14 +295,6 @@ body {
   align-items: center;
 }
 
-@keyframes Animation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .main__arrows {
   top: 43.3333333333%;
   left: -3%;
@@ -254,12 +313,12 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background: rgba(207, 224, 252, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   transition: all 0.3s ease-in;
 }
 .arrow:hover {
-  background: rgba(153, 175, 212, 0.5);
+  background: rgba(230, 239, 255, 0.5);
   transform: scale(1.1);
 }
 .arrow:active {
@@ -277,6 +336,9 @@ body {
   }
 }
 @media (max-width: 470px) {
+  .title {
+    font-size: 32px;
+  }
   .main__list-item {
     max-width: 300px;
   }
@@ -288,9 +350,6 @@ body {
   }
 }
 @media (max-width: 350px) {
-  .title {
-    font-size: 32px;
-  }
   .main__list-item {
     max-width: 250px;
   }

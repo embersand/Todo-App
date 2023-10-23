@@ -1,4 +1,5 @@
 const buttonAdd = document.querySelector('.btn');
+const subtitle = document.querySelector('.subtitle');
 const list = document.querySelector('.main__list');
 let number = 0;
 for (key in { ...localStorage }) {
@@ -8,6 +9,7 @@ for (key in { ...localStorage }) {
 }
 
 if (number) {
+  subtitle.style.display = 'block';
   list.style.display = 'block';
   const items = { ...JSON.parse(JSON.stringify(localStorage)) };
   for (item in items) {
@@ -24,7 +26,7 @@ if (number) {
       </button>`;
     setInterval(() => {
       newItem.classList.add('_active');
-    }, 10);
+    }, 100);
     list.appendChild(newItem);
   }
   const inputs = list.querySelectorAll('.main__text');
@@ -42,11 +44,13 @@ if (number) {
     });
   });
 } else {
+  subtitle.style.display = 'none';
   list.style.display = 'none';
 }
 
 buttonAdd.addEventListener('click', () => {
   if (list.style.display === 'none') {
+    subtitle.style.display = 'block';
     list.style.display = 'block';
   }
   number++;
@@ -67,7 +71,7 @@ const addItem = (id, text) => {
      </button>`;
   setInterval(() => {
     newItem.classList.add('_active');
-  }, 0);
+  }, 100);
   localStorage.setItem(id, text);
   const input = newItem.querySelector('.main__text');
   input.addEventListener('input', (event) => {
@@ -86,6 +90,7 @@ const left = document.querySelector('.left');
 const right = document.querySelector('.right');
 const slides = document.querySelector('.main__slides');
 let count = 0;
+
 Array.from(slides.children)[count].classList.toggle('_active');
 
 left.addEventListener('click', () => {
@@ -135,6 +140,10 @@ Array.from(slides.children).forEach((item) => {
     event.preventDefault();
     isDown = false;
   });
+  item.addEventListener('touchcancel', (event) => {
+    event.preventDefault();
+    isDown = false;
+  });
   item.addEventListener('touchmove', (event) => {
     if (!isDown) {
       return;
@@ -143,8 +152,10 @@ Array.from(slides.children).forEach((item) => {
     currentX = event.targetTouches[0].clientX;
     if (currentX - startX < -100) {
       prevSlide();
+      isDown = false;
     } else if (currentX - startX > 100) {
       nextSlide();
+      isDown = false;
     }
   });
 });
@@ -166,3 +177,9 @@ const nextSlide = () => {
   }
   Array.from(slides.children)[count].classList.toggle('_active');
 };
+
+const timer = () => {
+  nextSlide();
+  setTimeout(timer, 5000);
+};
+timer();
