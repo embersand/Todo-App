@@ -31,10 +31,10 @@ body {
   font-size: 18px;
   font-family: 'Onest', sans-serif;
   font-weight: 400;
-  transition: opacity 0.2s ease-in;
+  transition: opacity .2s ease-in;
 
   &:hover {
-    opacity: 0.7;
+    opacity: .7;
   }
 
   &:active {
@@ -103,7 +103,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.2s ease-in;
+  transition: all .2s ease-in;
   transform: translate(-120%, 0px);
 
   &._active {
@@ -125,7 +125,7 @@ body {
 
   svg {
     fill: black;
-    transition: fill 0.2s ease-in;
+    transition: fill .2s ease-in;
 
     &:hover {
 
@@ -146,15 +146,30 @@ body {
 .main__slides {}
 
 .main__slides-item {
-  width: 600px;
+  width: 544px;
   height: 300px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: rgba(216, 213, 213, 0.5);
+  background: rgba(234, 255, 252, 0.5);
   border-radius: 25px;
+  display: none;
+  animation-name: Animation;
+  animation-duration: 1s;
 
+  &._active {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@keyframes Animation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .main__arrows {
@@ -166,8 +181,6 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-
-
 }
 
 .arrow {
@@ -177,17 +190,18 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background: rgba(169, 188, 221, 0.5);
+  background: rgba(207, 224, 252, 0.5);
   border-radius: 50%;
-  transition: background 0.2s ease-in;
+  transition: all .3s ease-in;
 
   &:hover {
-    background: rgba(153, 175, 212, 0.5);
+    background: rgba(153, 175, 212, .5);
+    transform: scale(1.1);
   }
 
   &:active {
     top: 1px;
-    background: rgba(153, 175, 212, 0.8);
+    background: rgba(153, 175, 212, .8);
   }
 }
 
@@ -196,12 +210,21 @@ body {
     max-width: 400px;
   }
 
+  .main__slides-item {
+    max-width: 444px;
+    height: 250px;
+  }
+
   .main__text {}
 }
 
 @media(max-width: 470px) {
   .main__list-item {
     max-width: 300px;
+  }
+
+  .main__slides-item {
+    max-width: 344px;
   }
 
   .main__text {
@@ -216,6 +239,11 @@ body {
 
   .main__list-item {
     max-width: 250px;
+  }
+
+  .main__slides-item {
+    max-width: 294px;
+
   }
 
   .main__text {

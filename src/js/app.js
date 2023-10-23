@@ -85,36 +85,67 @@ const addItem = (id, text) => {
 const left = document.querySelector('.left');
 const right = document.querySelector('.right');
 const slides = document.querySelector('.main__slides');
-
 let count = 0;
-
-Array.from(slides.children).forEach((item, index) => {
-  if (index > 0) {
-    item.style.display = 'none';
-  }
-});
+Array.from(slides.children)[count].classList.toggle('_active');
 
 left.addEventListener('click', () => {
-  count--;
-  if (count < 0) {
-    Array.from(slides.children)[++count].style.display = 'none';
-    count = slides.length - 1;
-    Array.from(slides.children)[count].style.display = 'block';
-  } else {
-    Array.from(slides.children)[++count].style.display = 'none';
-    Array.from(slides.children)[count].style.display = 'block';
-  }
+  prevSlide();
 });
 
 right.addEventListener('click', () => {
-  if (count < slides.length) {
-    Array.from(slides.children)[count].style.display = 'none';
-    count++;
-    console.log(count);
-    Array.from(slides.children)[count].style.display = 'block';
-  } else {
-    Array.from(slides.children)[count].style.display = 'none';
-    count = 0;
-    Array.from(slides.children)[count].style.display = 'block';
-  }
+  nextSlide();
 });
+
+let startX = 0;
+let currentX = 0;
+let isDown = false;
+
+Array.from(slides.children).forEach((item, index) => {
+  item.addEventListener('mousedown', (event) => {
+    event.preventDefault();
+    startX = event.clientX;
+    isDown = true;
+  });
+
+  item.addEventListener('mouseup', (event) => {
+    event.preventDefault();
+    isDown = false;
+  });
+
+  item.addEventListener('mouseleave', (event) => {
+    event.preventDefault();
+    isDown = false;
+  });
+
+  item.addEventListener('mousemove', (event) => {
+    if (!isDown) {
+      return;
+    }
+
+    event.preventDefault();
+    currentX = event.clientX;
+    if (currentX - startX < -50) {
+      prevSlide();
+    } else if (currentX - startX > 50) {
+      nextSlide();
+    }
+  });
+});
+
+const prevSlide = () => {
+  Array.from(slides.children)[count].classList.toggle('_active');
+  count--;
+  if (count < 0) {
+    count = Array.from(slides.children).length - 1;
+  }
+  Array.from(slides.children)[count].classList.toggle('_active');
+};
+
+const nextSlide = () => {
+  Array.from(slides.children)[count].classList.toggle('_active');
+  count++;
+  if (count >= Array.from(slides.children).length) {
+    count = 0;
+  }
+  Array.from(slides.children)[count].classList.toggle('_active');
+};
