@@ -40,6 +40,10 @@ if (number) {
     item.addEventListener('click', () => {
       item.closest('li').remove();
       localStorage.removeItem(item.parentElement.id);
+      if (Object.keys(localStorage).length === 0) {
+        subtitle.style.display = 'none';
+        list.style.display = 'none';
+      }
       number++;
     });
   });
@@ -82,6 +86,10 @@ const addItem = (id, text) => {
   btnDelete.addEventListener('click', () => {
     newItem.remove();
     localStorage.removeItem(id);
+    if (Object.keys(localStorage).length === 0) {
+      subtitle.style.display = 'none';
+      list.style.display = 'none';
+    }
   });
   list.appendChild(newItem);
 };
